@@ -6,11 +6,12 @@ let cart_btn = document.querySelector("#cart_btn")
 let list = document.querySelector("#list")
 let loader = document.querySelector("#loader")
 let categories_list = document.querySelector("#categories")
-let paginate = document.createElement("div")
-paginate.classList.add("flex", "gap-2", "items-center")
-let pagination = document.querySelector("#pagination")
-function getProd(id = 1) {
-    fetch(`https://api.escuelajs.co/api/v1/products/?categoryId=${id}`, {
+let errorMessage = document.querySelector("#errorMessage")
+// let paginate = document.createElement("div")
+// paginate.classList.add("flex", "gap-2", "items-center")
+// let pagination = document.querySelector("#pagination")
+function getProd() {
+    fetch(`https://fakestoreapi.com/products`, {
         method: "GET",
     })
     .then((res) => {
@@ -32,7 +33,7 @@ function listProd(products) {
     list.innerHTML = ""
     products.forEach((prod) => {
         let box = document.createElement("div")
-        box.classList.add("col-span-1", "p-7", "border", "border-[#262626]", "rounded-xl", "w-full", "justify-center",)
+        box.classList.add("col-span-1", "lg:p-7","es:p-3","group", "border", "border-[#262626]", "rounded-xl", "w-full", "justify-center","flex","flex-col","items-center")
         let prod_h1 = document.createElement("h1")
         if (prod.title.split(" ")[2] == "&") {
             prod_h1.textContent = prod.title.split(" ").slice(0, 2).join(" ")
@@ -49,11 +50,11 @@ function listProd(products) {
         prod_p.textContent = `${prod.description.slice(0, 20)} ...`
         prod_p.classList.add("text-[#999999]", "text-xs")
         let prod_img = document.createElement("img")
-        prod_img.src = prod.images[0]
+        prod_img.src = prod.image
         prod_img.alt = prod.title
-        prod_img.classList.add("w-full", "rounded-lg", "mb-7", "object-cover")
+        prod_img.classList.add("xl:w-full","es:w-[288px]", "rounded-lg", "mb-7","lg:h-[288px]","es:h-[288px]","group-hover:object-center","group-hover:w-[400px]","duration-150","easy-in")
         let prod_category = document.createElement("span")
-        prod_category.textContent = prod.category.name
+        prod_category.textContent = prod.category
         prod_category.classList.add("bg-[#1A1A1A]", "border", "rounded-full", "border-[#262626]", "text-white", "text-[14px]", "font-semibold", 'py-[9px]', "px-[13px]", "inline-block", "mt-2")
         let prod_price_box = document.createElement("div")
         prod_price_box.classList.add("flex", "justify-between", "items-center", "mt-4", "w-full")
@@ -67,7 +68,7 @@ function listProd(products) {
         prod_price_p2.classList.add("text-white", "text-[18px]", "font-semibold")
         let prod_price_btn = document.createElement("button")
         prod_price_btn.textContent = "Add To Cart"
-        prod_price_btn.classList.add("text-[18px]", "bg-[#703BF7]", "text-white", "px-4", "py-1", "rounded-lg")
+        prod_price_btn.classList.add("text-[18px]", "bg-[#703BF7]", "text-white", "px-4", "py-1", "rounded-lg","active:bg-purple/70","duration-150","easy-in-out")
         prod_price_btn.setAttribute("onclick",`addToCart(${prod.id})`)
         box.appendChild(prod_img)
         box.appendChild(prod_h1)
@@ -80,26 +81,26 @@ function listProd(products) {
         prod_price_box_l.appendChild(prod_price_p1)
         prod_price_box_l.appendChild(prod_price_p2)
         prod_price_box.appendChild(prod_price_btn)
-        list.appendChild(box)
-        list.appendChild(paginate)
+        list.appendChild(box)   
     });
 }
-function getCategory() {
-    fetch("https://api.escuelajs.co/api/v1/categories?limit=5", {
+async function getCategory() {
+    let res = await fetch('https://fakestoreapi.com/products/categories', {
         method: "GET"
     })
-        .then((res) => res.json())
+        res = await res.json()
         .then((res) => {
             findCategory(res)
         })
 }
 function findCategory(cat) {
+    cat.unshift("all")
     cat.forEach((item, i) => {
         let category_li = document.createElement("li")
         let category_ul = document.createElement("ul")
-        category_li.textContent = item.name
-        category_li.classList.add("text-white", "text-[18px]", "px-2", "py-1", "my-3", "cursor-pointer", "bg-gradient-to-r", "from-[#1A1A1A]", "to-transparent")
-        category_li.setAttribute("onclick", `getProd(${item.id})`)
+        category_li.textContent = item
+        category_li.classList.add("text-white", "text-[18px]", "px-2", "py-1", "my-2", "cursor-pointer", "bg-gradient-to-r", "from-[#1A1A1A]", "to-transparent")
+        category_li.setAttribute("onclick", `filterByCategory("${item}")`)
         let firstElementSet = false
         if (i === 0 && !firstElementSet) {
             category_li.classList.add("border-l-2", "border-[#703BF7]")
@@ -116,33 +117,44 @@ function findCategory(cat) {
         categories_list.appendChild(category_ul);
     })
 }
-getCategory()
-function render_pagination() {
-    pagination.innerHTML = ""
-    let fragment = document.createDocumentFragment()
-    for (let i = 1; i <= 5; i++) {
-        let btn_pag = document.createElement("button")
-        btn_pag.classList.add("bg-purple", "w-[34px]", "h-[34px]", "rounded-lg", "text-white")
-        btn_pag.textContent = i
-        btn_pag.setAttribute("onclick", `getProd()`)
-        fragment.appendChild(btn_pag)
+const filterByCategory = async (category) => {
+    let res = await fetch(`https://fakestoreapi.com/products/category/${category}`)
+    res = await res.json() 
+    if(category == "all"){
+        getProd()
+    }else{
+        listProd(res)
     }
-    pagination.appendChild(fragment)
 }
-render_pagination()
+getCategory()
+
 async function addToCart(params) {
-    let res = await fetch(`https://api.escuelajs.co/api/v1/products/${params}`)
+    let res = await fetch(`https://fakestoreapi.com/products/${params}`)
     res = await res.json()
-    cart.push(res)
-    console.log(cart);
+    let filter = cart.find((item)=>{
+        return item.id == res.id
+    })
+    if(filter == undefined){
+        cart.push({...res, count:1})
+    }else{
+        setTimeout(function() {
+            errorMessage.classList.remove("translate-x-[2000px]")            
+        }, 1);
+        setTimeout(function() {
+            errorMessage.classList.add("translate-x-[2000px]")            
+        }, 3000);
+    }
     badge.textContent = cart.length
+    renderCard(res)
+}
+function renderCard() {
     if(cart !== 0){
         cart_btn.classList.remove("hidden")
     }
     showcart.innerHTML = ""
-    cart.forEach((item)=>{
+    cart.forEach((item,id)=>{
         let box = document.createElement("div")
-        box.classList.add("col-span-1", "p-7", "border", "border-[#262626]", "rounded-xl", "w-full", "justify-center",)
+        box.classList.add("col-span-1", "lg:p-7","es:p-3","group", "border", "border-[#262626]", "rounded-xl", "sm:w-[330px]","es:w-full", "justify-center","flex","inline-block","flex-col","items-center","overflow-y-auto")
         let prod_h1 = document.createElement("h1")
         if (item.title.split(" ")[2] == "&") {
             prod_h1.textContent = item.title.split(" ").slice(0, 2).join(" ")
@@ -159,11 +171,11 @@ async function addToCart(params) {
         prod_p.textContent = `${item.description.slice(0, 20)} ...`
         prod_p.classList.add("text-[#999999]", "text-xs")
         let prod_img = document.createElement("img")
-        prod_img.src = item.images[0]
+        prod_img.src = item.image
         prod_img.alt = item.title
-        prod_img.classList.add("w-full", "rounded-lg", "mb-7", "object-cover")
+        prod_img.classList.add("xl:w-full","es:w-[288px]", "rounded-lg", "mb-7","lg:h-[288px]","es:h-[250px]")
         let prod_category = document.createElement("span")
-        prod_category.textContent = item.category.name
+        prod_category.textContent = item.category
         prod_category.classList.add("bg-[#1A1A1A]", "border", "rounded-full", "border-[#262626]", "text-white", "text-[14px]", "font-semibold", 'py-[9px]', "px-[13px]", "inline-block", "mt-2")
         let prod_price_box = document.createElement("div")
         prod_price_box.classList.add("flex", "justify-between", "items-center", "mt-4", "w-full")
@@ -174,7 +186,25 @@ async function addToCart(params) {
         prod_price_p1.classList.add("text-[#999999]", "text-xs")
         let prod_price_p2 = document.createElement("p")
         prod_price_p2.textContent = `$ ${item.price}`
-        prod_price_p2.classList.add("text-white", "text-[18px]", "font-semibold")
+        prod_price_p2.classList.add("text-white", "sm:text-[18px]","es:text-[14px]", "font-semibold")
+        let prod_price_box_r = document.createElement("div")
+        prod_price_box_r.classList.add("flex","gap-1","text-white","items-center","lg:text-[24px]","md:text-[20px]","es:text-base")
+        let deleteDiv = document.createElement("div")
+        deleteDiv.classList.add("bg-red-600","sm:w-[45px]","sm:h-[45px]","es:w-[30px]","es:h-[30px]","rounded-lg","flex","justify-center","items-center","cursor-pointer")
+        let removeProd =document.createElement("i")
+        removeProd.classList.add("fa-solid","fa-trash-can")
+        deleteDiv.setAttribute("onclick",`deleteProd(${id})`)
+        let plus = document.createElement("button")
+        plus.textContent = "+"
+        plus.classList.add("bg-purple","sm:w-[45px]","sm:h-[45px]","es:w-[30px]","es:h-[30px]","text-center","rounded-lg","font-bold",)
+        plus.setAttribute("onclick",`increment(${item.id})`)
+        let span = document.createElement("span")
+        span.textContent = item.count
+        span.classList.add("py-3","w-[45px]","font-bold","text-center")
+        let minus = document.createElement("button")
+        minus.textContent = "-"
+        minus.classList.add("bg-purple","sm:w-[45px]","sm:h-[45px]","es:w-[30px]","es:h-[30px]","text-center","rounded-lg","font-bold",)
+        minus.setAttribute("onclick",`discrement(${item.id})`)
         box.appendChild(prod_img)
         box.appendChild(prod_h1)
         prod_desc.appendChild(prod_p)
@@ -183,14 +213,65 @@ async function addToCart(params) {
         box.appendChild(prod_category)
         box.appendChild(prod_price_box)
         prod_price_box.appendChild(prod_price_box_l)
+        prod_price_box.appendChild(prod_price_box_r)
         prod_price_box_l.appendChild(prod_price_p1)
         prod_price_box_l.appendChild(prod_price_p2)
+        deleteDiv.appendChild(removeProd)
+        prod_price_box_r.appendChild(deleteDiv)
+        prod_price_box_r.appendChild(minus)
+        prod_price_box_r.appendChild(span)
+        prod_price_box_r.appendChild(plus)
         showcart.appendChild(box)
     })
 }
+function increment(i) {
+    let findProd = cart.find((item) => {
+        return item.id === i
+    })
+    if (findProd.count < findProd.rating.count) {
+        findProd.count += 1;
+        renderCard()
+    }
+    
+}
+function discrement(i) {
+    let findProd = cart.find((item) => {
+        return item.id === i
+    })
+    if (findProd.count > 1) {
+        findProd.count -= 1
+        renderCard()
+    }   
+}
+function deleteProd(i){
+    cart.splice(i,1)
+    renderCard()
+    if(cart.length == 0){
+        showDiv.classList.add("translate-x-[-2000px]")
+        cart_btn.classList.add("hidden")
+    }
+}
+
 function showCart(){
-    showDiv.classList.remove("translate-x-[-4000px]")
+    showDiv.classList.toggle("translate-x-[-2000px]")
 }
 function noshow(){
-    showDiv.classList.add("translate-x-[-4000px]")
+    showDiv.classList.add("translate-x-[-2000px]")
 }
+function noshowtwo(){
+    errorMessage.classList.add("translate-x-[2000px]")
+}
+
+// function render_pagination() {
+//     pagination.innerHTML = ""
+//     let fragment = document.createDocumentFragment()
+//     for (let i = 1; i <= 5; i++) {
+//         let btn_pag = document.createElement("button")
+//         btn_pag.classList.add("bg-purple", "w-[34px]", "h-[34px]", "rounded-lg", "text-white")
+//         btn_pag.textContent = i
+//         btn_pag.setAttribute("onclick", `getProd()`)
+//         fragment.appendChild(btn_pag)
+//     }
+//     pagination.appendChild(fragment)
+// }
+// render_pagination()

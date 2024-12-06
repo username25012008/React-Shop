@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>React FullStack Shop</title>
+    <link rel="shortcut icon" href="https://react-shop-siza.vercel.app/assets/Pro%20siyah-YkhBd6v0.jpg"
+        type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap"
@@ -46,28 +48,45 @@
                         'purple': '#703BF7'
                     },
                 },
+                screens: {
+                    'es': '320px',
+                    'sm': '640px',
+                    'md': '768px',
+                    'lg': '1024px',
+                    'xl': '1280px'
+                },
+
             },
         };
     </script>
 </head>
 
-<body class="bg-[#141414] font-urbanist">
+<body class="bg-[#141414] font-urbanist ">
     <nav class="">
-        <div class="w-[85%] mx-auto relative z-[100] py-[4.5px]">
-            <div class="flex justify-between items-center">
-                <h1 class="text-white text-[48px] font-bold hover:text-purple duration-150 ease-in-out"><a
+        <div class="hamburger">
+            <div
+                class="xl:hidden bg-[#1A1A1A] rounded-lg border border-[#262626] z-[99] w-10 h-10 absolute left-2 top-2 cursor-pointer p-1 es:flex justify-around items-center flex-col ">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24"
+                    class="text-purple text-2xl font-bold" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 4H21V6H3V4ZM9 11H21V13H9V11ZM3 18H21V20H3V18Z"></path>
+                </svg>
+            </div>
+        </div>
+        <div class="xl:w-[85%] sm:w-[70%] es:w-[97%] mx-auto relative z-[100] xl:py-4 lg:py-[22.5px] es:py-[16.5px]">
+            <div class="w-full flex items-center justify-end sm:justify-around">
+                <h1 class="text-white xl:text-[48px] md:text-[36px] sm:text-xl es:text-base font-bold hover:text-purple duration-150 ease-in-out mr-2"><a
                         href="../index.html">React Shop</a></h1>
                 <ul
-                    class="bg-[#141414] flex justify-around text-xl text-white w-[400px] border-2 border-[#262626] rounded-full py-2 px-4">
+                    class="bg-[#141414] xl:flex  es:hidden justify-around text-xl text-white w-[400px] border-2 border-[#262626] rounded-full py-2 px-4">
                     <li class="hover:text-purple duration-150 ease-in-out"><a href="../index.html">Home</a></li>
                     <li class="hover:text-purple duration-150 ease-in-out"><a href="#">Products</a></li>
                     <li class="hover:text-purple duration-150 ease-in-out"><a href="#">About</a></li>
                 </ul>
                 <div class="flex items-center justify-between gap-2">
-                    <div class="flex items-center gap-4">
+                    <div class="flex items-center sm:gap-4 gap-2">
                         <!-- login -->
                         <button
-                            class="hover:text-purple duration-150 ease-in-out bg-[#141414] border border-[#262626] rounded-lg px-2 py-1 text-xl text-white font-bold flex items-center">
+                            class="hover:text-purple duration-150 ease-in-out bg-[#141414] border border-[#262626] rounded-lg px-2 py-1 xl:text-xl sm:text-base es:text-sm text-white font-bold flex items-center">
                             <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"
                                 stroke-linecap="round" stroke-linejoin="round" class="mr-2" height="1em" width="1em"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -82,7 +101,7 @@
                         </button>
                         <!-- sign -->
                         <button
-                            class="hover:text-purple duration-150 ease-in-out bg-[#141414] border border-[#262626] rounded-lg px-2 py-1 text-xl text-white font-bold flex items-center">
+                            class="hover:text-purple duration-150 ease-in-out bg-[#141414] border border-[#262626] rounded-lg md:px-2 es:px-1 py-1 xl:text-xl sm:text-base es:text-sm text-white font-bold flex items-center">
                             <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"
                                 stroke-linecap="round" stroke-linejoin="round" class="mr-2" height="1em" width="1em"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -98,7 +117,7 @@
                     <div class="flex items-center gap-2">
                         <!-- desctop -->
                         <button
-                            class="hover:text-purple duration-150 ease-in-out bg-[#141414] border border-[#262626] rounded-lg px-2 py-2 text-xl text-white font-bold">
+                            class="hover:text-purple duration-150 ease-in-out bg-[#141414] border border-[#262626] rounded-lg md:px-2 es:px-1 py-2 text-xl text-white font-bold xl:block es:hidden">
                             <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 256 256"
                                 class="text-sky-500 hover:text-purple duration-150 ease-in-out cursor-pointer"
                                 height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
@@ -112,7 +131,7 @@
                         </button>
                         <!-- git -->
                         <button
-                            class="hover:text-purple duration-150 ease-in-out bg-[#141414] border border-[#262626] rounded-lg px-2 py-2 text-xl text-white font-bold">
+                            class="hover:text-purple duration-150 ease-in-out bg-[#141414] border border-[#262626] rounded-lg px-2 py-2 text-xl text-white font-bold xl:block es:hidden">
                             <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 496 512"
                                 height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -131,17 +150,20 @@
                 src="https://react-shop-siza.vercel.app/assets/AbstractDesign-5_Gpi5_9.svg" alt="bg-header">
         </div>
     </nav>
-    <!-- loader -->
+    <div id="errorMessage" class="fixed lg:top-[100px] es:top-[80px] right-[40px] bg-[#141414] border border-red-400 rounded-lg width-full h-[60px] z-[999] lg:p-3 md:p-2 es:p-1 text-red-500 xl:text-[24px] md:text-base es:text-sm flex items-center lg:gap-4 es:gap-2 duration-500 ease-in-out translate-x-[2000px]">
+        <div class="cursor-pointer" onclick="noshowtwo()"><i class="fa-solid fa-xmark"></i></div>
+        <h1 class="">Mahsulot savatga qoshilgan</h1>
+    </div>
     <div id="loader" class="center-body">
         <div class="loader-triangle-3">
-            <svg id="triangle" width="150px" height="150px" viewbox="-3 -4 39 39" class="bg-[#141414]">
+            <svg id="triangle" viewbox="-3 -4 39 39" class="bg-[#141414] md:w-[150px] md:h-[150px] es:w-[100px] es:h-[100px]">
                 <polygon fill="transparent" stroke="#703BF7" stroke-width="1" points="16,0 32,32 0,32"></polygon>
             </svg>
         </div>
     </div>
-    <section class="w-[90%] mx-auto p-6 relative">
+    <section class="lg:w-[90%] md:w-[95%] es:w-[97%] mx-auto p-6 relative overflow-hidden">
         <div class="flex gap-10 items-center">
-            <div class="relative my-12 flex items-center block w-1/3">
+            <div class="relative my-12 flex items-center block lg:w-1/3 md:w-2/4 es:w-full">
                 <button id="findButton" onclick="findToProd()" class="bg-purple z-[2] ms-3 absolute rounded-lg"><svg
                         stroke="currentColor" fill="currentColor" stroke-width="0" version="1.1" id="search" x="0px"
                         y="0px" viewBox="0 0 24 24" class="bg-purpleshade-400 p-1 w-7 h-7 text-white rounded-lg "
@@ -157,14 +179,11 @@
                     class="absolute border border-[#262626] rounded-lg z-[1] block p-4 ps-12 text-white bg-[#141414] outline-2 outline-purple py-[13.5px] w-full"
                     placeholder="Search...">
             </div>
-            <div class="flex items-start bg-purple p-[18px] rounded-lg relative cursor-pointer hidden" id="cart_btn" onclick="showCart()">
-                <i class="fa-solid fa-cart-shopping text-white"></i>
-                <sup id="badge" class="absolute top-[-8px] right-[-10px] text-white bg-red-600 px-3 py-3 rounded-full text-[16px]">0</sup>
-            </div>
+         
         </div>
-        <div class="flex justify-between items-start">
-            <div id="list" class="grid grid-cols-3 gap-7 w-[81%]"></div>
-            <div class="w-[19%] border border-[#262626] rounded-lg ml-6 pt-5 inline">
+        <div class="flex lg:flex-row es:flex-col-reverse justify-between items-start es:gap-10">
+            <div id="list" class="grid xl:grid-cols-3 md:grid-cols-2 es:grid-cols-1 gap-7 md:w-[81%] sm:w-[50%] min-w-[400px]:w-full  mx-auto"></div>
+            <div class="lg:w-[22%] es:w-full border border-[#262626] rounded-lg xl:ml-6 pt-5 inline">
                 <div class="flex items-center ml-2">
                     <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round"
                         stroke-linejoin="round" class="mr-2 text-[#703BF7] text-xl" height="1em" width="1em"
@@ -178,22 +197,22 @@
             </div>
         </div>
         <div id="pagination" class="flex gap-4 mx-auto my-6 w-[17.8%]"></div>
-        <div id="showCartDiv" class="absolute width-[90%] h-auto top-[30px] translate-x-[-4000px] border border bg-[#141414] z-[999] rounded-lg p-6 duration-300 ease-in">
+        <div id="showCartDiv" class="absolute w-[90%] mx-auto h-auto top-[30px] translate-x-[-2000px] border border bg-[#141414] z-[300] rounded-lg p-6 duration-1000 ease-in-out ">
             <div class="relative cursor-pointer" onclick="noshow()"><i class="fa-solid fa-xmark absolute right-0 text-[25px] text-purple"></i></div>
-            <h1 class="text-white text-[60px] text-center font-bold my-6">Cart</h1>
-            <div id="showToCart" class="grid grid-cols-3 gap-7 w-[81%]"></div>
+            <h1 class="text-white xl:text-[60px] lg:text-[50px] md:text-[40px] sm:text-[30px] es:text-[25px] text-center font-bold lg:my-6 sm:m-3 sm:my-2">Cart</h1>
+            <div id="showToCart" class="grid xl:grid-cols-3 md:grid-cols-2 es:grid-cols-1 gap-7 es:w-[100%]  min-w-[400px]:w-full  mx-auto"></div>
         </div>
     </section>
     <footer class="w-[75%] mx-auto">
-        <div class="border-y border-[#959595] mt-[92px] py-12 flex justify-between pb-10">
+        <div class="border-y border-[#959595] lg:mt-[92px] es:mt-10 lg:py-12 es:py-4 flex lg:justify-between es:justify-center pb-10">
             <div>
-                <p class="text-sm text-white"><span
+                <p class="text-es text-white"><span
                         class="text-grayshade-400 hover:text-[#999999] hover:underline transition duration-150 ease-in-out">Terms
                     </span>· <span
                         class="text-grayshade-400 hover:text-[#999999] hover:underline transition duration-150 ease-in-out">Privacy
                         Policy</span></p>
             </div>
-            <table class="text-left">
+            <table class="text-left lg:block es:hidden">
                 <thead class="">
                     <tr class="text-[#8254F8]">
                         <th>Products</th>
@@ -281,6 +300,14 @@
             </table>
         </div>
     </footer>
+
+    <div class="fixed right-5 bottom-5">
+            <div class=" flex items-start bg-purple p-[18px] z-[998] rounded-lg relative cursor-pointer hidden active:bg-purple/70 duration-150 ease-in-out" id="cart_btn" onclick="showCart()">
+        <i class="fa-solid fa-cart-shopping text-white"></i>
+        <sup id="badge" class="absolute top-[-8px] right-[-10px] text-white bg-red-600 px-3 py-3 rounded-full text-[16px]">0</sup>
+    </div>
+    </div>
+
     <script src="./main.js"></script>
 </body>
 
