@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -41,16 +42,15 @@
 
 <body class="bg-[#141414] font-urbanist ">
     <nav class="">
-        <div class="hamburger">
-            <div
+        <div class="relative z-[100]">
+            <div onclick="show()"
                 class="xl:hidden bg-[#1A1A1A] rounded-lg border border-[#262626] z-[99] w-10 h-10 absolute left-2 top-2 cursor-pointer p-1 es:flex justify-around items-center flex-col ">
                 <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24"
                     class="text-purple text-2xl font-bold" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                     <path d="M3 4H21V6H3V4ZM9 11H21V13H9V11ZM3 18H21V20H3V18Z"></path>
                 </svg>
             </div>
-        </div>
-        <div class="xl:w-[85%] sm:w-[70%] es:w-[97%] mx-auto relative z-[100] xl:py-4 lg:py-[22.5px] es:py-[16.5px]">
+           <div class="xl:w-[85%] sm:w-[70%] es:w-[97%] mx-auto xl:py-4 lg:py-[22.5px] es:py-[16.5px]">
             <div class="w-full flex items-center justify-end sm:justify-around">
                 <h1
                     class="text-white xl:text-[48px] md:text-[36px] sm:text-xl es:text-base font-bold hover:text-purple duration-150 ease-in-out mr-2">
@@ -122,23 +122,33 @@
                         </button>
                     </div>
                 </div>
-
             </div>
-
+           </div>
         </div>
         <div class="">
             <img class="absolute top-0 left-0 max-h-[67px] lg:max-h-[81px] w-full h-full object-cover border-b-2 border-[#262626]"
                 src="https://react-shop-siza.vercel.app/assets/AbstractDesign-5_Gpi5_9.svg" alt="bg-header">
         </div>
     </nav>
+    <div id="bar"
+        class="fixed w-full h-[200px] bg-[#141414] top-0 right-0 z-[999] flex justify-center items-center border-2 border-transparent border-b-[#262626] duration-500 ease-in-out translate-y-[-200px]">
+        <ul class="flex flex-col gap-4 justify-around text-xl text-white w-[400px] py-2 px-4">
+            <a href="../homePage.html"><li class="hover:text-purple duration-150 ease-in-out pr-[100%]">Home</li></a>
+            <a href="./productPage.html"><li class="hover:text-purple duration-150 ease-in-out">Products</li></a>
+            <a href="#"><li class="hover:text-purple duration-150 ease-in-out">About</li></a>
+        </ul>
+        <i class="text-end text-3xl text-white fa-solid fa-xmark absolute top-2 right-4" onclick="noShow()"></i>
+    </div>
     <section class="w-[75%] mx-auto">
         <div class="mt-20">
             <h1 class="md:text-3xl text-xl mt-6 mb-3 font-extrabold text-purple">About Developer</h1>
-            <p class="text-white md:text-xl text-base">Hello there! I'm <span class="">Ali Zarshenas</span>, the passionate developer
+            <p class="text-white md:text-xl text-base">Hello there! I'm <span class="">Ali Zarshenas</span>, the
+                passionate developer
                 behind this website. With a keen eye for detail and a love for crafting seamless digital experiences, I
                 set out to create a unique and user-friendly online shopping platform.</p>
             <h1 class="md:text-3xl text-xl mt-6 mb-3 font-extrabold text-purple">Frameworks and Technologies Used</h1>
-            <p class="text-white md:text-xl text-base">In the development of this website, I've harnessed the power of the following
+            <p class="text-white md:text-xl text-base">In the development of this website, I've harnessed the power of
+                the following
                 frameworks and technologies to create a modern, single-page application (SPA):</p>
             <div class="flex text-4xl md:text-[60px] justify-evenly my-8 text-[#999999]">
                 <svg stroke="currentColor" fill="currentColor" stroke-width="0" role="img" viewBox="0 0 24 24"
@@ -166,7 +176,8 @@
                 </svg>
             </div>
             <h1 class="md:text-3xl text-xl mt-6 mb-3 font-extrabold text-purple">A Glimpse into the Backend:</h1>
-            <p class="text-white md:text-xl text-base">While my expertise primarily lies in frontend development, I've integrated
+            <p class="text-white md:text-xl text-base">While my expertise primarily lies in frontend development, I've
+                integrated
                 Node.js and Express.js on the backend to ensure a robust and efficient server-side infrastructure. This
                 combination allows for smooth communication between the frontend and the server, ensuring a seamless
                 user experience.</p>
@@ -188,7 +199,8 @@
                 </svg>
             </div>
             <h1 class="md:text-3xl text-xl mt-6 mb-3 font-extrabold text-purple">Let's Connect</h1>
-            <p class="text-white md:text-xl text-base">Explore the website, discover the offerings, and if you have any questions or
+            <p class="text-white md:text-xl text-base">Explore the website, discover the offerings, and if you have any
+                questions or
                 suggestions, I'm here to listen. Your journey through this online shopping experience is as important to
                 me as it is to you. Happy exploring!</p>
             <div class="flex text-4xl md:text-[60px] justify-evenly my-8 text-[#999999]">
@@ -307,6 +319,8 @@
             </table>
         </div>
     </footer>
+
+    <script src="../js/main.js"></script>
 </body>
 
 </html>

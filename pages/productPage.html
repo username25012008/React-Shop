@@ -63,23 +63,25 @@
 
 <body class="bg-[#141414] font-urbanist ">
     <nav class="">
-        <div class="hamburger">
-            <div
+        <div class="relative z-[100]">
+            <div onclick="show()"
                 class="xl:hidden bg-[#1A1A1A] rounded-lg border border-[#262626] z-[99] w-10 h-10 absolute left-2 top-2 cursor-pointer p-1 es:flex justify-around items-center flex-col ">
                 <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24"
                     class="text-purple text-2xl font-bold" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                     <path d="M3 4H21V6H3V4ZM9 11H21V13H9V11ZM3 18H21V20H3V18Z"></path>
                 </svg>
             </div>
-        </div>
-        <div class="xl:w-[85%] sm:w-[70%] es:w-[97%] mx-auto relative z-[100] xl:py-4 lg:py-[22.5px] es:py-[16.5px]">
+           <div class="xl:w-[85%] sm:w-[70%] es:w-[97%] mx-auto xl:py-4 lg:py-[22.5px] es:py-[16.5px]">
             <div class="w-full flex items-center justify-end sm:justify-around">
-                <h1 class="text-white xl:text-[48px] md:text-[36px] sm:text-xl es:text-base font-bold hover:text-purple duration-150 ease-in-out mr-2"><a
-                        href="../index.html">React Shop</a></h1>
+                <h1
+                    class="text-white xl:text-[48px] md:text-[36px] sm:text-xl es:text-base font-bold hover:text-purple duration-150 ease-in-out mr-2">
+                    <a href="../index.html">React Shop</a>
+                </h1>
                 <ul
                     class="bg-[#141414] xl:flex  es:hidden justify-around text-xl text-white w-[400px] border-2 border-[#262626] rounded-full py-2 px-4">
                     <li class="hover:text-purple duration-150 ease-in-out"><a href="../homePage.html">Home</a></li>
-                    <li class="hover:text-purple duration-150 ease-in-out"><a href="#">Products</a></li>
+                    <li class="hover:text-purple duration-150 ease-in-out"><a href="#">Products</a>
+                    </li>
                     <li class="hover:text-purple duration-150 ease-in-out"><a href="./aboutPage.html">About</a></li>
                 </ul>
                 <div class="flex items-center justify-between gap-2">
@@ -141,15 +143,23 @@
                         </button>
                     </div>
                 </div>
-
             </div>
-
+           </div>
         </div>
         <div class="">
             <img class="absolute top-0 left-0 max-h-[67px] lg:max-h-[81px] w-full h-full object-cover border-b-2 border-[#262626]"
                 src="https://react-shop-siza.vercel.app/assets/AbstractDesign-5_Gpi5_9.svg" alt="bg-header">
         </div>
     </nav>
+    <div id="bar"
+        class="fixed w-full h-[200px] bg-[#141414] top-0 right-0 z-[999] flex justify-center items-center border-2 border-transparent border-b-[#262626] duration-500 ease-in-out translate-y-[-200px]">
+        <ul class="flex flex-col gap-4 justify-around text-xl text-white w-[400px] py-2 px-4">
+            <a href="../homePage.html"><li class="hover:text-purple duration-150 ease-in-out pr-[100%]">Home</li></a>
+            <a href="#"><li class="hover:text-purple duration-150 ease-in-out">Products</li></a>
+            <a href="./aboutPage.html"><li class="hover:text-purple duration-150 ease-in-out">About</li></a>
+        </ul>
+        <i class="text-end text-3xl text-white fa-solid fa-xmark absolute top-2 right-4" onclick="noShow()"></i>
+    </div>
     <div id="errorMessage" class="fixed lg:top-[100px] es:top-[80px] right-[40px] bg-[#141414] border border-red-400 rounded-lg width-full h-[60px] z-[999] lg:p-3 md:p-2 es:p-1 text-red-500 xl:text-[24px] md:text-base es:text-sm flex items-center lg:gap-4 es:gap-2 duration-500 ease-in-out translate-x-[2000px]">
         <div class="cursor-pointer" onclick="noshowtwo()"><i class="fa-solid fa-xmark"></i></div>
         <h1 class="">Mahsulot savatga qoshilgan</h1>
@@ -307,7 +317,7 @@
         <sup id="badge" class="absolute top-[-8px] right-[-10px] text-white bg-red-600 px-3 py-3 rounded-full text-[16px]">0</sup>
     </div>
     </div>
-
+    <script src="../js/main.js"></script>
     <script src="../js/productMain.js"></script>
 </body>
 

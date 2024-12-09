@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -41,23 +42,25 @@
 <body class="bg-[#141414] font-urbanist">
     <div class="bg-[#141414]">
         <nav class="">
-            <div class="hamburger">
-                <div
+            <div class="relative z-[100]">
+                <div onclick="show()"
                     class="xl:hidden bg-[#1A1A1A] rounded-lg border border-[#262626] z-[99] w-10 h-10 absolute left-2 top-2 cursor-pointer p-1 es:flex justify-around items-center flex-col ">
                     <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24"
                         class="text-purple text-2xl font-bold" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                         <path d="M3 4H21V6H3V4ZM9 11H21V13H9V11ZM3 18H21V20H3V18Z"></path>
                     </svg>
                 </div>
-            </div>
-            <div class="xl:w-[85%] sm:w-[70%] es:w-[97%] mx-auto relative z-[100] xl:py-4 lg:py-[22.5px] es:py-[16.5px]">
+               <div class="xl:w-[85%] sm:w-[70%] es:w-[97%] mx-auto xl:py-4 lg:py-[22.5px] es:py-[16.5px]">
                 <div class="w-full flex items-center justify-end sm:justify-around">
-                    <h1 class="text-white xl:text-[48px] md:text-[36px] sm:text-xl es:text-base font-bold hover:text-purple duration-150 ease-in-out mr-2"><a
-                            href="./homePage.html">React Shop</a></h1>
+                    <h1
+                        class="text-white xl:text-[48px] md:text-[36px] sm:text-xl es:text-base font-bold hover:text-purple duration-150 ease-in-out mr-2">
+                        <a href="../index.html">React Shop</a>
+                    </h1>
                     <ul
                         class="bg-[#141414] xl:flex  es:hidden justify-around text-xl text-white w-[400px] border-2 border-[#262626] rounded-full py-2 px-4">
                         <li class="hover:text-purple duration-150 ease-in-out"><a href="#">Home</a></li>
-                        <li class="hover:text-purple duration-150 ease-in-out"><a href="./pages/productPage.html">Products</a></li>
+                        <li class="hover:text-purple duration-150 ease-in-out"><a href="./pages/productPage.html">Products</a>
+                        </li>
                         <li class="hover:text-purple duration-150 ease-in-out"><a href="./pages/aboutPage.html">About</a></li>
                     </ul>
                     <div class="flex items-center justify-between gap-2">
@@ -119,26 +122,34 @@
                             </button>
                         </div>
                     </div>
-    
                 </div>
-    
+               </div>
             </div>
             <div class="">
                 <img class="absolute top-0 left-0 max-h-[67px] lg:max-h-[81px] w-full h-full object-cover border-b-2 border-[#262626]"
                     src="https://react-shop-siza.vercel.app/assets/AbstractDesign-5_Gpi5_9.svg" alt="bg-header">
             </div>
         </nav>
+        <div id="bar"
+            class="fixed w-full h-[200px] bg-[#141414] top-0 right-0 z-[999] flex justify-center items-center border-2 border-transparent border-b-[#262626] duration-500 ease-in-out translate-y-[-200px]">
+            <ul class="flex flex-col gap-4 justify-around text-xl text-white w-[400px] py-2 px-4">
+                <a href="#"><li class="hover:text-purple duration-150 ease-in-out pr-[100%]">Home</li></a>
+                <a href="./pages/productPage.html"><li class="hover:text-purple duration-150 ease-in-out">Products</li></a>
+                <a href="./pages/aboutPage.html"><li class="hover:text-purple duration-150 ease-in-out">About</li></a>
+            </ul>
+            <i class="text-end text-3xl text-white fa-solid fa-xmark absolute top-2 right-4" onclick="noShow()"></i>
+        </div>
         <section class="relative  sm:w-full es:w-[97%] mx-auto">
             <div class="lg:block hidden absolute left-[240px] bottom-[40px]">
                 <div class="w-28 h-28 rounded-full bg-gradient-to-b lg:from-[#A685FA] lg:to-purple"></div>
             </div>
             <div class="text-center md:pt-40 es:pt-20 pb-10">
-                    <h1 class=" md:text-[60px] es:text-[48px] font-bold text-white">Make your Outfit <span
+                    <h1 class=" md:text-[60px] es:text-[48px] font-bold text-white" data-aos="zoom-y-out">Make your Outfit <span
                     class="text-purple relative">wonderful<div class="absolute bg-gradient-to-r from-transparent to-[#141414] w-[40%] h-[72px] top-2 right-0"></div></span></h1>
-                <p class="mt-4 text-[#949494] text-xl xl:w-[50%] lg:w-[75%] md:w-[80%] es:w-full mx-auto">Lorem ipsum, dolor sit amet consectetur
+                <p class="mt-4 text-[#949494] text-xl xl:w-[50%] lg:w-[75%] md:w-[80%] es:w-full mx-auto" data-aos="zoom-y-out">Lorem ipsum, dolor sit amet consectetur
                     adipisicing elit. Facere soluta iusto expedita veniam asperiores, cumque id, tempora numquam
                     voluptatibus.</p>
-                <div class="flex sm:flex-row es:flex-col justify-center items-center gap-4 mt-8 sm:w-full es:w-[300px] mx-auto">
+                <div class="flex sm:flex-row es:flex-col justify-center items-center gap-4 mt-8 sm:w-full es:w-[300px] mx-auto" data-aos="zoom-y-out" data-aos-delay="300">
                     <button
                         class="btn_section text-white bg-custom-gray py-3 px-8 sm:w-auto w-full rounded-lg font-semibold ease-in duration-300 hover:bg-purple">Start
                         Shopping</button>
@@ -153,12 +164,12 @@
         <section class="relative xl:w-[75%] w-[90%] mx-auto mt-10">
             <div class="absolute left-0 right-0 -top-11 m-auto w-px p-px h-20 bg-gray-200 "></div>
             <div class="text-center pt-20 pb-16">
-                <h1 class="text-white text-base">Explore the solutions</h1>
-                <p class="mt-4 text-[#949494] text-xl w-[70%] mx-auto">Duis aute irure dolor in reprehenderit in
+                <h1 class="text-white text-base" data-aos="zoom-in-up">Explore the solutions</h1>
+                <p class="mt-4 text-[#949494] text-xl w-[70%] mx-auto" data-aos="zoom-in">Duis aute irure dolor in reprehenderit in
                     voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat.</p>
             </div>
             <div class="flex md:flex-row flex-col items-center gap-8">
-                <div class="md:w-[50%] sm:w-[80%] w-full">
+                <div class="md:w-[50%] sm:w-[80%] w-full" data-aos="fade-right">
                     <h1 class="text-white text-base">Powerful suite of tools</h1>
                     <p class="mt-4 text-[#949494] text-xl xl:w-[85%] w-full">Duis aute irure dolor in reprehenderit in voluptate
                         velit esse cillum dolore pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
@@ -228,7 +239,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="md:w-[50%] w-full md:mt-0 mt-10">
+                <div class="md:w-[50%] w-full md:mt-0 mt-10" data-aos="zoom-y-out">
                     <img class="img2" src="https://react-shop-siza.vercel.app/assets/illustration2-1b2WZaOp.svg" alt="people">
                 </div>
             </div>
@@ -237,13 +248,13 @@
     <div class="bg-[#141414]">
         <section class="xl:w-[75%] w-[85%] mx-auto h-[880px] md:h-[680px] lg:h-[500px]">
             <div class="relative">
-                <div class="text-center pt-32 lg:pb-40 pb-20">
-                    <h1 class="text-white text-base">How Simple works</h1>
-                    <p class="mt-4 text-[#949494] text-xl xl:w-[70%] w-full mx-auto">Duis aute irure dolor in reprehenderit in
+                <div class="text-center pt-32 lg:pb-34 pb-20">
+                    <h1 class="text-white text-base" data-aos="zoom-in-up">How Simple works</h1>
+                    <p class="mt-4 text-[#949494] text-xl xl:w-[70%] w-full mx-auto" data-aos="zoom-in">Duis aute irure dolor in reprehenderit in
                         voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat.</p>
                 </div>
-                <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-7 md:w-full sm:w-[60%] mx-auto ">
-                    <div class="bg-[#202020] hover:scale-110 ease-out duration-300 flex flex-col text-center col-span-1 items-center p-6 rounded shadow-xl">
+                <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-7 md:w-full sm:w-[60%] mx-auto overflow-hidden">
+                    <div data-aos="fade-right" class="bg-[#202020] hover:scale-110 ease-out duration-300 flex flex-col text-center col-span-1 items-center p-6 rounded shadow-xl">
                         <div><svg class="w-16 h-16 p-1 -mt-1 mb-2" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
                                 <g fill="none" fill-rule="evenodd">
                                     <rect class="fill-current text-purple" width="64" height="64" rx="32"></rect>
@@ -262,7 +273,7 @@
                         <h1 class="text-xl mb-1 text-white font-bold mt-4">Initial Contact</h1>
                         <p class="text-base text-[#999999]">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                     </div>
-                    <div class="bg-[#202020] hover:scale-110 ease-out duration-300 flex flex-col text-center col-span-1 items-center p-6 rounded shadow-xl">
+                    <div data-aos="fade-up" class="bg-[#202020] hover:scale-110 ease-out duration-300 flex flex-col text-center col-span-1 items-center p-6 rounded shadow-xl">
                         <div><svg class="w-16 h-16 p-1 -mt-1 mb-2" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
                                 <g fill="none" fill-rule="evenodd">
                                     <rect class="fill-current text-purple" width="64" height="64" rx="32"></rect>
@@ -281,7 +292,7 @@
                         <h1 class="text-xl mb-1 text-white font-bold mt-4">Discovery Session</h1>
                         <p class="text-base text-[#999999]">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                     </div>
-                    <div class="bg-[#202020] hover:scale-110 ease-out duration-300 flex flex-col text-center col-span-1 items-center p-6 rounded shadow-xl">
+                    <div data-aos="fade-left" class="bg-[#202020] hover:scale-110 ease-out duration-300 flex flex-col text-center col-span-1 items-center p-6 rounded shadow-xl">
                         <div><svg class="w-16 h-16 p-1 -mt-1 mb-2" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
                                 <g fill="none" fill-rule="evenodd">
                                     <rect class="fill-current text-purple" width="64" height="64" rx="32"></rect>
@@ -298,7 +309,7 @@
                         <h1 class="text-xl mb-1 text-white font-bold mt-4">Contracting</h1>
                         <p class="text-base text-[#999999]">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                     </div>
-                    <div class="bg-[#202020] hover:scale-110 ease-out duration-300 flex flex-col text-center col-span-1 items-center p-6 rounded shadow-xl">
+                    <div data-aos="fade-left" class="bg-[#202020] hover:scale-110 ease-out duration-300 flex flex-col text-center col-span-1 items-center p-6 rounded shadow-xl">
                         <div><svg class="w-16 h-16 p-1 -mt-1 mb-2" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
                                 <g fill="none" fill-rule="evenodd">
                                     <rect class="fill-current text-purple" width="64" height="64" rx="32"></rect>
@@ -316,7 +327,7 @@
                         <h1 class="text-xl mb-1 text-white font-bold mt-4">Fast Prototyping</h1>
                         <p class="text-base text-[#999999]">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                     </div>
-                    <div class="bg-[#202020] hover:scale-110 ease-out duration-300 flex flex-col text-center col-span-1 items-center p-6 rounded shadow-xl">
+                    <div data-aos="fade-up" class="bg-[#202020] hover:scale-110 ease-out duration-300 flex flex-col text-center col-span-1 items-center p-6 rounded shadow-xl">
                         <div><svg class="w-16 h-16 p-1 -mt-1 mb-2" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
                                 <g fill="none" fill-rule="evenodd">
                                     <rect class="fill-current text-purple" width="64" height="64" rx="32"></rect>
@@ -331,7 +342,7 @@
                         <h1 class="text-xl mb-1 text-white font-bold mt-4">Design Phase</h1>
                         <p class="text-base text-[#999999]">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                     </div>
-                    <div class="bg-[#202020] hover:scale-110 ease-out duration-300 flex flex-col text-center col-span-1 items-center p-6 rounded shadow-xl">
+                    <div data-aos="fade-right" class="bg-[#202020] hover:scale-110 ease-out duration-300 flex flex-col text-center col-span-1 items-center p-6 rounded shadow-xl">
                         <div><svg class="w-16 h-16 p-1 -mt-1 mb-2" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
                                 <g fill="none" fill-rule="evenodd">
                                     <rect class="fill-current text-purple" width="64" height="64" rx="32"></rect>
@@ -361,11 +372,11 @@
         <section class="md:pb-20 pb-0 relative">
             <div class="absolute left-0 right-0 -top-11 m-auto w-px p-px h-20 bg-gray-200 "></div>
             <div class="text-center pt-24 pb-20">
-                <h1 class="text-white text-base">Trusted by over 20,000 companies all over the world</h1>
-                <p class="mt-4 text-[#949494] text-xl xl:w-[50%] w-full mx-auto">Arcu cursus vitae congue mauris rhoncus viverra
+                <h1 class="text-white text-base" data-aos="zoom-in-up">Trusted by over 20,000 companies all over the world</h1>
+                <p class="mt-4 text-[#949494] text-xl xl:w-[50%] w-full mx-auto" data-aos="fade-up">Arcu cursus vitae congue mauris rhoncus viverra
                     nibh cras pulvinar mattis blandit libero cursus mattis.</p>
             </div>
-            <div class="md:w-[60%] w-[90%] mx-auto flex md:flex-nowrap flex-wrap justify-between items-center">
+            <div class="md:w-[60%] w-[90%] mx-auto flex md:flex-nowrap flex-wrap md:justify-between justify-center gap-6 items-center">
                 <div class="flex items-center justify-center py-2 hover:scale-110 ease-out duration-300"><svg class="text-white w-full fill-current"
                         width="124" height="24" viewBox="0 0 124 24" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -398,7 +409,7 @@
                         </path>
                     </svg></div>
             </div>
-            <div
+            <div data-aos="zoom-in" data-aos-delay="300"
                 class="hover:scale-110 ease-out duration-300 relative md:w-[50%] w-[90%] flex flex-col items-center border-purple mx-auto border rounded-lg my-20 text-center px-12 pb-8 bg-[#1A1A1A]">
                 <div class="mt-[-30px] "><img class="rounded-full"
                         src="https://react-shop-siza.vercel.app/assets/avatar-khHvyp0N.png" width="96" height="96"
@@ -412,9 +423,9 @@
             </div>
         </section>
         <section class="my-10 md:mb-[200px] mb-20">
-            <div class="bg-[#1A1A1A] lg:w-[75%] w-[90%] rounded-lg mx-auto relative px-12 py-16 overflow-hidden hover:scale-110 ease-out duration-300">
+            <div data-aos="zoom-in" data-aos-delay="300" class="bg-[#1A1A1A] lg:w-[75%] w-[90%] rounded-lg mx-auto relative px-12 py-16 overflow-hidden hover:scale-110 ease-out duration-300">
                 <div class="w-full lg:text-start text-center">
-                    <h1 class="text-white text-base">Powering your business</h1>
+                    <h1 class="text-white text-base font-bold">Powering your business</h1>
                     <p class="text-[#D1D5D8] text-[18px] mt-2 lg:w-[55%] w-full lg:mx-0 mx-auto">Lorem ipsum dolor sit amet consectetur
                         adipisicing elit nemo expedita voluptas culpa sapiente.</p>
                     <div class="flex sm:flex-row flex-col gap-2 mt-6 lg:justify-start justify-center">
@@ -549,6 +560,7 @@
     <script>
         AOS.init();
     </script>
+    <script src="./js/main.js"></script>
     <script src="./js/homeMain.js"></script>
 </body>
 
