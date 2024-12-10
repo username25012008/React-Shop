@@ -7,6 +7,11 @@ let list = document.querySelector("#list")
 let loader = document.querySelector("#loader")
 let categories_list = document.querySelector("#categories")
 let errorMessage = document.querySelector("#errorMessage")
+let totalPrice = document.querySelector("#totalPrice")
+let check = document.querySelector("#check")
+let productDiv = document.querySelector("#productDiv")
+let inputFind = document.querySelector("#inputFind")
+let allPrice = 0
 // let paginate = document.createElement("div")
 // paginate.classList.add("flex", "gap-2", "items-center")
 // let pagination = document.querySelector("#pagination")
@@ -14,26 +19,25 @@ function getProd() {
     fetch(`https://fakestoreapi.com/products`, {
         method: "GET",
     })
-    .then((res) => {
-        return res.json()
-    })
-    .then((res) => {
-        listProd(res)
+        .then((res) => {
+            return res.json()
+        })
+        .then((res) => {
+            listProd(res)
         })
         .catch((err) => {
             console.log(err)
         })
         .finally(() => {
             loader.classList.add("hidden")
-        })        
-    }
-    getProd()
-
+        })
+}
+getProd()
 function listProd(products) {
     list.innerHTML = ""
     products.forEach((prod) => {
         let box = document.createElement("div")
-        box.classList.add("col-span-1", "lg:p-7","es:p-3","group", "border", "border-[#262626]", "rounded-xl", "w-full", "justify-center","flex","flex-col","items-center")
+        box.classList.add("col-span-1", "lg:p-7", "p-3", "border", "border-[#262626]", "rounded-xl", "w-full", "justify-center", "flex", "flex-col", "items-center")
         let prod_h1 = document.createElement("h1")
         if (prod.title.split(" ")[2] == "&") {
             prod_h1.textContent = prod.title.split(" ").slice(0, 2).join(" ")
@@ -52,7 +56,7 @@ function listProd(products) {
         let prod_img = document.createElement("img")
         prod_img.src = prod.image
         prod_img.alt = prod.title
-        prod_img.classList.add("xl:w-full","es:w-[288px]", "rounded-lg", "mb-7","lg:h-[288px]","es:h-[288px]","group-hover:object-center","group-hover:w-[400px]","duration-150","easy-in")
+        prod_img.classList.add("xl:w-full", "w-[288px]", "rounded-lg", "mb-7", "lg:h-[288px]", "h-[288px]", "duration-150", "easy-in")
         let prod_category = document.createElement("span")
         prod_category.textContent = prod.category
         prod_category.classList.add("bg-[#1A1A1A]", "border", "rounded-full", "border-[#262626]", "text-white", "text-[14px]", "font-semibold", 'py-[9px]', "px-[13px]", "inline-block", "mt-2")
@@ -64,12 +68,12 @@ function listProd(products) {
         prod_price_p1.textContent = "Price"
         prod_price_p1.classList.add("text-[#999999]", "text-xs")
         let prod_price_p2 = document.createElement("p")
-        prod_price_p2.textContent = `$ ${prod.price}`
+        prod_price_p2.textContent = `$ ${Math.round(prod.price)}`
         prod_price_p2.classList.add("text-white", "text-[18px]", "font-semibold")
         let prod_price_btn = document.createElement("button")
         prod_price_btn.textContent = "Add To Cart"
-        prod_price_btn.classList.add("text-[18px]", "bg-[#703BF7]", "text-white", "px-4", "py-1", "rounded-lg","active:bg-purple/70","duration-150","easy-in-out")
-        prod_price_btn.setAttribute("onclick",`addToCart(${prod.id})`)
+        prod_price_btn.classList.add("text-[18px]", "bg-[#703BF7]", "text-white", "px-4", "py-1", "rounded-lg", "active:bg-purple/70", "duration-150", "easy-in-out")
+        prod_price_btn.setAttribute("onclick", `addToCart(${prod.id})`)
         box.appendChild(prod_img)
         box.appendChild(prod_h1)
         prod_desc.appendChild(prod_p)
@@ -81,14 +85,14 @@ function listProd(products) {
         prod_price_box_l.appendChild(prod_price_p1)
         prod_price_box_l.appendChild(prod_price_p2)
         prod_price_box.appendChild(prod_price_btn)
-        list.appendChild(box)   
+        list.appendChild(box)
     });
 }
 async function getCategory() {
     let res = await fetch('https://fakestoreapi.com/products/categories', {
         method: "GET"
     })
-        res = await res.json()
+    res = await res.json()
         .then((res) => {
             findCategory(res)
         })
@@ -119,42 +123,43 @@ function findCategory(cat) {
 }
 const filterByCategory = async (category) => {
     let res = await fetch(`https://fakestoreapi.com/products/category/${category}`)
-    res = await res.json() 
-    if(category == "all"){
+    res = await res.json()
+    if (category == "all") {
         getProd()
-    }else{
+    } else {
         listProd(res)
     }
 }
 getCategory()
-
 async function addToCart(params) {
     let res = await fetch(`https://fakestoreapi.com/products/${params}`)
     res = await res.json()
-    let filter = cart.find((item)=>{
+    let filter = cart.find((item) => {
         return item.id == res.id
     })
-    if(filter == undefined){
-        cart.push({...res, count:1})
-    }else{
-        setTimeout(function() {
-            errorMessage.classList.remove("translate-x-[2000px]")            
+    if (filter == undefined) {
+        cart.push({ ...res, count: 1 })
+    } else {
+        setTimeout(function () {
+            errorMessage.classList.remove("translate-x-[2000px]")
         }, 1);
-        setTimeout(function() {
-            errorMessage.classList.add("translate-x-[2000px]")            
+        setTimeout(function () {
+            errorMessage.classList.add("translate-x-[2000px]")
         }, 3000);
     }
     badge.textContent = cart.length
     renderCard(res)
 }
 function renderCard() {
-    if(cart !== 0){
+    if (cart !== 0) {
         cart_btn.classList.remove("hidden")
     }
     showcart.innerHTML = ""
-    cart.forEach((item,id)=>{
+    totalPrice.innerHTML = ""
+    cart.forEach((item, id) => {
+        allSum()
         let box = document.createElement("div")
-        box.classList.add("col-span-1", "lg:p-7","es:p-3","group", "border", "border-[#262626]", "rounded-xl", "sm:w-[330px]","es:w-full", "justify-center","flex","inline-block","flex-col","items-center","overflow-y-auto")
+        box.classList.add("col-span-1", "lg:p-7", "p-3", "group", "border", "border-[#262626]", "rounded-xl", "sm:w-[330px]", "w-full", "justify-center", "flex", "inline-block", "flex-col", "items-center", "overflow-y-auto")
         let prod_h1 = document.createElement("h1")
         if (item.title.split(" ")[2] == "&") {
             prod_h1.textContent = item.title.split(" ").slice(0, 2).join(" ")
@@ -173,7 +178,7 @@ function renderCard() {
         let prod_img = document.createElement("img")
         prod_img.src = item.image
         prod_img.alt = item.title
-        prod_img.classList.add("xl:w-full","es:w-[288px]", "rounded-lg", "mb-7","lg:h-[288px]","es:h-[250px]")
+        prod_img.classList.add("xl:w-full", "w-[288px]", "rounded-lg", "mb-7", "lg:h-[288px]", "h-[250px]")
         let prod_category = document.createElement("span")
         prod_category.textContent = item.category
         prod_category.classList.add("bg-[#1A1A1A]", "border", "rounded-full", "border-[#262626]", "text-white", "text-[14px]", "font-semibold", 'py-[9px]', "px-[13px]", "inline-block", "mt-2")
@@ -185,26 +190,26 @@ function renderCard() {
         prod_price_p1.textContent = "Price"
         prod_price_p1.classList.add("text-[#999999]", "text-xs")
         let prod_price_p2 = document.createElement("p")
-        prod_price_p2.textContent = `$ ${item.price}`
-        prod_price_p2.classList.add("text-white", "sm:text-[18px]","es:text-[14px]", "font-semibold")
+        prod_price_p2.textContent = `$ ${Math.round(item.price * item.count)}`
+        prod_price_p2.classList.add("text-white", "sm:text-[18px]", "text-[14px]", "font-semibold")
         let prod_price_box_r = document.createElement("div")
-        prod_price_box_r.classList.add("flex","gap-1","text-white","items-center","lg:text-[24px]","md:text-[20px]","es:text-base")
+        prod_price_box_r.classList.add("flex", "gap-1", "text-white", "items-center", "lg:text-[24px]", "md:text-[20px]", "text-base")
         let deleteDiv = document.createElement("div")
-        deleteDiv.classList.add("bg-red-600","sm:w-[45px]","sm:h-[45px]","es:w-[30px]","es:h-[30px]","rounded-lg","flex","justify-center","items-center","cursor-pointer")
-        let removeProd =document.createElement("i")
-        removeProd.classList.add("fa-solid","fa-trash-can")
-        deleteDiv.setAttribute("onclick",`deleteProd(${id})`)
+        deleteDiv.classList.add("bg-red-600", "sm:w-[45px]", "sm:h-[45px]", "w-[30px]", "h-[30px]", "rounded-lg", "flex", "justify-center", "items-center", "cursor-pointer")
+        let removeProd = document.createElement("i")
+        removeProd.classList.add("fa-solid", "fa-trash-can")
+        deleteDiv.setAttribute("onclick", `deleteProd(${id})`)
         let plus = document.createElement("button")
         plus.textContent = "+"
-        plus.classList.add("bg-purple","sm:w-[45px]","sm:h-[45px]","es:w-[30px]","es:h-[30px]","text-center","rounded-lg","font-bold",)
-        plus.setAttribute("onclick",`increment(${item.id})`)
+        plus.classList.add("bg-purple", "sm:w-[45px]", "sm:h-[45px]", "w-[30px]", "h-[30px]", "text-center", "rounded-lg", "font-bold",)
+        plus.setAttribute("onclick", `increment(${item.id})`)
         let span = document.createElement("span")
         span.textContent = item.count
-        span.classList.add("py-3","w-[45px]","font-bold","text-center")
+        span.classList.add("py-3", "w-[45px]", "font-bold", "text-center")
         let minus = document.createElement("button")
         minus.textContent = "-"
-        minus.classList.add("bg-purple","sm:w-[45px]","sm:h-[45px]","es:w-[30px]","es:h-[30px]","text-center","rounded-lg","font-bold",)
-        minus.setAttribute("onclick",`discrement(${item.id})`)
+        minus.classList.add("bg-purple", "sm:w-[45px]", "sm:h-[45px]", "w-[30px]", "h-[30px]", "text-center", "rounded-lg", "font-bold",)
+        minus.setAttribute("onclick", `discrement(${item.id})`)
         box.appendChild(prod_img)
         box.appendChild(prod_h1)
         prod_desc.appendChild(prod_p)
@@ -231,8 +236,8 @@ function increment(i) {
     if (findProd.count < findProd.rating.count) {
         findProd.count += 1;
         renderCard()
+        allSum()
     }
-    
 }
 function discrement(i) {
     let findProd = cart.find((item) => {
@@ -241,27 +246,51 @@ function discrement(i) {
     if (findProd.count > 1) {
         findProd.count -= 1
         renderCard()
-    }   
-}
-function deleteProd(i){
-    cart.splice(i,1)
-    renderCard()
-    if(cart.length == 0){
-        showDiv.classList.add("translate-x-[-2000px]")
-        cart_btn.classList.add("hidden")
+        allSum()
     }
 }
-
-function showCart(){
-    showDiv.classList.toggle("translate-x-[-2000px]")
+function deleteProd(i) {
+    cart.splice(i, 1)
+    renderCard()
+    if (cart.length == 0) {
+        showDiv.classList.add("translate-y-[-2000px]")
+        cart_btn.classList.add("hidden")
+    }
+    allSum()
 }
-function noshow(){
-    showDiv.classList.add("translate-x-[-2000px]")
+async function findToProd() {
+    let res = await fetch('https://fakestoreapi.com/products')
+    res = await res.json()
+    filteredByProduct(res)
 }
-function noshowtwo(){
+function filteredByProduct(prod) {
+    let filteredProduct = prod.filter((item) => {
+        return item.title.toLowerCase().includes(inputFind.value.toLowerCase())
+    })
+    listProd(filteredProduct)
+}
+function showCart() {
+    showDiv.classList.toggle("translate-y-[-2000px]")
+}
+function noshow() {
+    showDiv.classList.add("translate-y-[-2000px]")
+}
+function noshowtwo() {
     errorMessage.classList.add("translate-x-[2000px]")
 }
+function allSum() {
+    allPrice = cart.reduce((first, item) => {
+        return first + item.count * item.price
+    }, 0)
+    totalPrice.textContent = Math.round(allPrice)
+}
+function bought() {
+    productDiv.classList.add("hidden")
+    check.classList.remove("hidden")
+    cart_btn.classList.add("hidden")
+    cart = []
 
+}
 // function render_pagination() {
 //     pagination.innerHTML = ""
 //     let fragment = document.createDocumentFragment()
